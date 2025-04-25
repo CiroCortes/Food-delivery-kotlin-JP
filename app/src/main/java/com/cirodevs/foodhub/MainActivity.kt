@@ -2,6 +2,7 @@ package com.cirodevs.foodhub
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
@@ -16,15 +17,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.cirodevs.foodhub.data.FoodApi
 import com.cirodevs.foodhub.ui.theme.FoodHubAndroidTheme
+import dagger.hilt.android.AndroidEntryPoint
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     var showSplashScreen = true
+
+    @Inject
+    lateinit var foodApi : FoodApi
     override fun onCreate(savedInstanceState: Bundle?) {
          // aqui estamos utilizando la libreria splash, la cual le indicamos
         // que inicie la animacion, mientras cargamos los datos de la app
@@ -73,6 +82,10 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
+        }
+
+        if(::foodApi.isInitialized){
+            Log.d("MainActivity", "FoodApi  initialized")
         }
         CoroutineScope(Dispatchers.IO).launch {
             delay(3000)
