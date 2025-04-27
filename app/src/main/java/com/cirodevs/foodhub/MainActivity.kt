@@ -20,6 +20,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.cirodevs.foodhub.data.FoodApi
 import com.cirodevs.foodhub.ui.features.auth.AuthScreen
+import com.cirodevs.foodhub.ui.features.auth.signup.SignUpScreen
 import com.cirodevs.foodhub.ui.theme.FoodHubAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -78,8 +79,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             FoodHubAndroidTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Box(modifier = Modifier.padding(innerPadding)){}
-                    AuthScreen()
+                    Box(modifier = Modifier.padding(innerPadding)){
+                        SignUpScreen()
+                    }
+                    //AuthScreen()
+
                 }
             }
         }
